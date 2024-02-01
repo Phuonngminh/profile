@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drag and Drop</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 100px;
+        border: 1px solid #000;
+        margin: 20px;
+        padding: 10px;
+      }
+
+      .draggable {
+        margin: 5px;
+        padding: 5px;
+        background-color: #ccc;
+        cursor: grab;
+      }
+      .container {
+        text-align: center;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div
+        id="box1"
+        class="box"
+        ondrop="drop(event)"
+        ondragover="allowDrop(event)"
+      >
+        Box 1
+        <div
+          id="text1"
+          class="draggable"
+          draggable="true"
+          ondragstart="drag(event)"
+        >
+          Kéo thả
+        </div>
+      </div>
+      <div
+        id="box2"
+        class="box"
+        ondrop="drop(event)"
+        ondragover="allowDrop(event)"
+      >
+        Box 2
+      </div>
+    </div>
+  </body>
+  <script>
+    function allowDrop(event) {
+      event.preventDefault();
+    }
+
+    function drag(event) {
+      event.dataTransfer.setData("text", event.target.id);
+    }
+
+    function drop(event) {
+      event.preventDefault();
+      var data = event.dataTransfer.getData("text");
+      var draggableElement = document.getElementById(data);
+      event.target.appendChild(draggableElement);
+    }
+  </script>
+</html>

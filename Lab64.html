@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài 4</title>
+  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 20px;
+    }
+
+    #container {
+      width: 300px;
+      height: 300px;
+      background-color: black;
+      position: relative;
+    }
+    .Tong {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #redBox {
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    #timeDisplay {
+      font-size: 50px;
+      margin-top: 1em;
+    }
+  </style>
+  <body>
+    <div class="Tong">
+      <div id="container">
+        <div id="redBox"></div>
+      </div>
+      <div id="timeDisplay">Thời gian:</div>
+    </div>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const redBox = document.getElementById("redBox");
+      const container = document.getElementById("container");
+      const timeDisplay = document.getElementById("timeDisplay");
+      let startTime, duration;
+
+      function randomizePosition() {
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+        const boxWidth = redBox.offsetWidth;
+        const boxHeight = redBox.offsetHeight;
+        const maxX = containerWidth - boxWidth;
+        const maxY = containerHeight - boxHeight;
+
+        const randomX = Math.floor(Math.random() * maxX);
+        const randomY = Math.floor(Math.random() * maxY);
+
+        redBox.style.left = `${randomX}px`;
+        redBox.style.top = `${randomY}px`;
+      }
+
+      function handleClick() {
+        if (!startTime) {
+          startTime = new Date().getTime();
+        } else {
+          const endTime = new Date().getTime();
+          duration = (endTime - startTime) / 1000;
+          timeDisplay.textContent = `Thời gian: ${duration.toFixed(2)} Giây`;
+          startTime = null;
+        }
+        randomizePosition();
+      }
+
+      redBox.addEventListener("click", handleClick);
+    });
+  </script>
+</html>

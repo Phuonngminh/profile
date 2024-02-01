@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map</title>
+    <style>
+      #map {
+        height: 400px;
+        width: 100%;
+      }
+      .container {
+        text-align: center;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 20px;
+      }
+      button {
+        margin-bottom: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <button id="showLocationButton">Hiện tọa độ</button>
+      <div id="coordinates"></div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const showLocationButton =
+          document.getElementById("showLocationButton");
+        const coordinatesDiv = document.getElementById("coordinates");
+
+        showLocationButton.addEventListener("click", function () {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+              const latitude = position.coords.latitude;
+              const longitude = position.coords.longitude;
+
+              const coordinatesText = `Tọa độ: (${latitude.toFixed(
+                6
+              )}, ${longitude.toFixed(6)})`;
+              coordinatesDiv.textContent = coordinatesText;
+
+              const mapOptions = {
+                center: { lat: latitude, lng: longitude },
+                zoom: 15,
+              };
+
+              const map = new google.maps.Map(
+                document.getElementById("map"),
+                mapOptions
+              );
+
+              const marker = new google.maps.Marker({
+                position: { lat: latitude, lng: longitude },
+                map: map,
+              });
+            });
+          } else {
+            alert("Không hỗ trợ khu vực này.");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
