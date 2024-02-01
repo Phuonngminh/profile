@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giỏ hàng cơ bản</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 20px;
+      }
+
+      .container {
+        text-align: center;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      input {
+        padding: 5px;
+        margin: 10px 0;
+      }
+
+      button {
+        padding: 8px 15px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      span {
+        display: block;
+        margin-top: 10px;
+      }
+      #img {
+        display: none;
+        width: 100px;
+        height: auto;
+        margin-top: 10px;
+      }
+      .flex {
+        display: flex;
+
+        flex-wrap: wrap;
+      }
+      .text {
+        text-align: left;
+      }
+      #amount {
+        text-align: end;
+      }
+      #p1 {
+        color: gray;
+        word-wrap: break-word;
+        font-size: 10px;
+        margin-top: 10px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <label id="pro" data-price="100">Đồng Hổ Casio</label>
+      <input type="number" id="qty" placeholder="Nhập số lượng" />
+      <button onclick="calculateTotal()">OK</button>
+      <div>
+        <hr />
+        <div class="flex">
+          <img id="img" src="Sp1.jpg" alt="a" />
+          <div class="text">
+            <span id="name"></span>
+
+            <div id="p1">
+              Với cái tên “Citizen” mang nghĩa toàn cầu, hãng đặt “tham vọng”
+              <br />
+              đưa đồng hồ (vốn được coi là một vật phẩm xa xỉ) tới tay tất cả
+              người dùng trên thế giới. <br />
+              aaaaaaaaaaaaaaaaaaaaaaaaaaa
+            </div>
+
+            <span id="amount"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function calculateTotal() {
+        var productName = document.getElementById("pro").innerText;
+        var productPrice = parseFloat(
+          document.getElementById("pro").getAttribute("data-price")
+        );
+        var quantity = parseInt(document.getElementById("qty").value);
+
+        var totalAmount = productPrice * quantity;
+
+        document.getElementById("name").innerText =
+          productName + " chất lượng cao miễn phí vận chuyển";
+        document.getElementById("amount").innerText =
+          "Tổng: $" + totalAmount.toFixed(2);
+        // Access the img element by its id and update its source
+        var imgElement = document.getElementById("img");
+        imgElement.src = "Sp1.jpg";
+
+        // Hiển thị hình ảnh khi nút OK được nhấn
+        document.getElementById;
+        imgElement.style.display = "block";
+        document.getElementById("p1").style.display = "block";
+      }
+    </script>
+  </body>
+</html>

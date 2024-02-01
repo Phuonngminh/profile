@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Player</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 20px;
+      }
+      video {
+        width: 50%;
+        margin-left: 200px;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      #controls {
+        background-color: rgb(74, 82, 82);
+        margin: 2em;
+        margin-left: 5em;
+      }
+      .fas {
+        font-size: 50px;
+        background-color: black;
+        width: 90px;
+        height: 50px;
+        border-radius: 8px;
+        margin: 20px;
+        padding-top: 20px;
+
+        padding-bottom: 20px;
+        text-align: center;
+      }
+      .fas:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+      }
+      .fas:hover {
+        background-color: rgb(37, 36, 36);
+      }
+      .fa-play {
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <video id="myVideo" controls>
+        <source src="vidoe.mp4" type="video/mp4" />
+      </video>
+      <div id="controls">
+        <div class="Grid"></div>
+        <i id="playPauseButton" class="fas fa-play"></i>
+        <i id="volumeUpButton" class="fas fa-plus"></i>
+        <br />
+        <i id="replayButton" class="fas fa-reply"></i>
+
+        <i id="volumeDownButton" class="fas fa-solid fa-minus"></i>
+        <br />
+        <i id="muteButton" class="fas fa-volume-mute"></i>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const video = document.getElementById("myVideo");
+        const playPauseButton = document.getElementById("playPauseButton");
+        const replayButton = document.getElementById("replayButton");
+        const volumeUpButton = document.getElementById("volumeUpButton");
+        const volumeDownButton = document.getElementById("volumeDownButton");
+        const muteButton = document.getElementById("muteButton");
+
+        playPauseButton.addEventListener("click", function () {
+          if (video.paused) {
+            video.play();
+            playPauseButton.textContent = "";
+          } else {
+            video.pause();
+            playPauseButton.textContent = "";
+          }
+        });
+
+        replayButton.addEventListener("click", function () {
+          video.currentTime = 0;
+          if (video.paused) {
+            video.play();
+            playPauseButton.textContent = "";
+          }
+        });
+
+        volumeUpButton.addEventListener("click", function () {
+          video.volume += 0.1;
+        });
+
+        volumeDownButton.addEventListener("click", function () {
+          video.volume -= 0.1;
+        });
+
+        muteButton.addEventListener("click", function () {
+          if (video.muted) {
+            video.muted = false;
+            muteButton.textContent = "";
+          } else {
+            video.muted = true;
+            muteButton.textContent = "";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
